@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "e4e1725e-93b4-4460-82a3-36361815bc4d",
+		"name": "comments_project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13586834"
+	},
+	"item": [
+		{
+			"name": "insert_comment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"compaign_id\":2207,\r\n    \"comment_id\":17945113897823972,\r\n    \"comment_description\":\"الجميلة الرائعة@ dose of inspiration and optimism 🌺🥰\",\r\n    \"sentiment\":\"Positive\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/insert",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"insert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_comments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_comment",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/delete/17945113897823972",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"delete",
+						"17945113897823972"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_comment",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"comment_id\":17945113897823972,\r\n    \"compaign_id\":2207,\r\n    \"comment_description\":\"Dose of inspiration and optimism 🌺🥰🌺🥰🌺🥰🌺🥰\",\r\n    \"sentiment\":\"Positive\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/update",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bulk_insert_csv",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "postman-cloud:///1eed8ef0-6487-47e0-947e-85aa0c77c958"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/bulk_insert",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"bulk_insert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "predict_sentiment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"text\":\"nice of you\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/predict/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"predict",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "predict_sentiment Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"text\":\"nice of you\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/predict/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"predict",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
