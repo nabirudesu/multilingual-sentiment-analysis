@@ -1,7 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,UploadFile,File
 import sqlite3
 from pydantic import BaseModel
 from classifier import predict_sentiment
+import pandas as pd
 
 class Comment(BaseModel):
     comment_id: int
@@ -51,7 +52,6 @@ def update_record(comment:Comment):
 
 @app.post("/bulk_insert")
 def insert_csv(file: UploadFile = File(...)):
-    logging.info("Received request to insert CSV file")
     df = pd.read_csv(file.file)
     connection = sqlite3.connect("../Comments.db")
     cursor = connection.cursor()
