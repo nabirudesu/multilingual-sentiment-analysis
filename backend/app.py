@@ -57,7 +57,7 @@ def insert_csv(file: UploadFile = File(...)):
     cursor = connection.cursor()
     df['sentiment']=df['comment_description'].apply(predict_sentiment)
     for i in range(0,len(df)):
-        cursor.execute("INSERT into  Comments (comment_id,campaign_id,description,sentiment) values(?,?,?,?)",(int(df.iloc[i,0]),int(df.iloc[i,1]),df.iloc[i,2],df.iloc[i,3]))
+        cursor.execute("INSERT into  Comments (comment_id,campaign_id,description,sentiment) values(?,?,?,?)",(int(df.iloc[i,1]),int(df.iloc[i,0]),df.iloc[i,2],df.iloc[i,3]))
         connection.commit()
     file.file.close()
     return {"filename": file.filename}
