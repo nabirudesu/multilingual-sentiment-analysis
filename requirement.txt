@@ -1,7 +1,9 @@
-tensorflow = 2.10.1
-tensorflow_hub
-tensorflow_text
-pydot
-matplotlib
+tensorflow_text==2.15.0
+langdetect
+tensorflow==2.15.0.post1
+tensorflow_hub==0.16.1
+pydantic
 pandas
-FastApi
+numpy
+sqlite3
+uvicorn
