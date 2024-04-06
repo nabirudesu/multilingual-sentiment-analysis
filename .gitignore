@@ -2,3 +2,5 @@ __pycache__
 *.tar.gz
 variables.data*
 *ckpt.data*
+bert_cased/
+bert_multi_cased_preprocessor/

@@ -1,0 +1,7 @@
+tensorflow = 2.10.1
+tensorflow_hub
+tensorflow_text
+pydot
+matplotlib
+pandas
+FastApi
