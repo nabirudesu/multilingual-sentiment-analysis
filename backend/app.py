@@ -16,14 +16,17 @@ def get_data():
     connection = sqlite3.connect("../Comments.db")
     cursor=connection.cursor()
     cursor.execute("SELECT * FROM Comments")
-    record = cursor.fetchone()
+    record = cursor.fetchmany()
     cursor.close()
     return{'message':record}
 
 @app.post("/predict/{text}")
 def delete_record(text:str):
     sentiment = predict_sentiment(text)
-    return{'message':sentiment}
+    return{
+        'text':text,
+        'message':sentiment
+        }
 
 @app.post("/insert")
 def insert_record(comment:Comment):
