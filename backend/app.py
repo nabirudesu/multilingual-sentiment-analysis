@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 import sqlite3
 from pydantic import BaseModel
+from classifier import predict_sentiment
 
 class Comment(BaseModel):
     comment_id: int
@@ -17,6 +18,11 @@ def get_data():
     record = cursor.fetchone()
     cursor.close()
     return{'message':record}
+
+@app.post("/predict/{text}")
+def delete_record(text:str):
+    sentiment = predict_sentiment(text)
+    return{'message':sentiment}
 
 @app.post("/insert")
 def insert_record(comment:Comment):
@@ -43,7 +49,15 @@ def update_record(comment:Comment):
     # update a record based on provided comment_id,campaign_id, description, sentiment
     return{'message':"record updated successfuly"}
 
-@app.post("bulk_insert")
-def insert_csv():
-    # uplaod a csv file containing comment_id,campaign_id and description, campute their sentiment and insert it to db
-    return {'message':"csv file inserted succefully to the database"}
+@app.post("/bulk_insert")
+def insert_csv(file: UploadFile = File(...)):
+    logging.info("Received request to insert CSV file")
+    df = pd.read_csv(file.file)
+    connection = sqlite3.connect("../Comments.db")
+    cursor = connection.cursor()
+    df['sentiment']=df['comment_description'].apply(predict_sentiment)
+    for i in range(0,len(df)):
+        cursor.execute("INSERT into  Comments (comment_id,campaign_id,description,sentiment) values(?,?,?,?)",(int(df.iloc[i,0]),int(df.iloc[i,1]),df.iloc[i,2],df.iloc[i,3]))
+        connection.commit()
+    file.file.close()
+    return {"filename": file.filename}

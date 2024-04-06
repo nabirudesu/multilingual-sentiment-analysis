@@ -14,14 +14,12 @@ def tokenize_data(text):
     return [encoder_inputs['input_word_ids'],encoder_inputs['input_mask'],encoder_inputs['input_type_ids']]
 
 
-tokenizeed_comment = tokenize_data('this is a really bad post I hate you soooooooooooooooo much')
-
-print(tokenizeed_comment)
-
-classe_probability=classifier.predict({'input_word_ids':tokenizeed_comment[0],'input_mask':tokenizeed_comment[1],'input_type_ids':tokenizeed_comment[2]})
-if classe_probability<=0.5:
-    sentiment='positive'
-    print(sentiment)
-else:
-    sentiment='negative'
-    print(sentiment)
+def predict_sentiment(text):
+    tokenizeed_comment= tokenize_data(text)
+    classe_probability=classifier.predict({'input_word_ids':tokenizeed_comment[0],'input_mask':tokenizeed_comment[1],'input_type_ids':tokenizeed_comment[2]})
+    if classe_probability<=0.5:
+        sentiment='positive'
+        return(sentiment)
+    else:
+        sentiment='negative'
+        return(sentiment)
